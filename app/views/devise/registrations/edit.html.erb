@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-7 col-md-offset-3">
+    
+  
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <div class="row">
+        <%= devise_error_messages! %>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>User avatar</label></br>
+            <%= default_profile_picture(resource) %><br />
+            <%= f.file_field :avatar, :id =>"imgInp"%>
+            
+            <p id="error-text"><%= resource.errors.messages[:avatar].flatten.join%></p>
+          </div><!-- form-group -->    
+        </div><!-- col-md-2 -->
+        <div class="col-md-7">
+          <div class="form-group">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          </div><!-- form-group -->
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          </div><!-- form-group -->
+
+          <div class="form-group">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+          </div><!-- form-group -->
+
+          <div class="form-group">
+            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+          </div><!-- form-group -->
+
+          <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
+        </div><!-- col-md-7 -->
+      </div><!-- row -->
+    <%= link_to "Back", :back %>
+  </div><!-- col-md-4 -->
+</div><!-- row -->
