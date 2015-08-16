@@ -22,6 +22,10 @@
               </ul>
             </li>
             <li>
+              <% mute = current_user.mute? ? 'unmute' : 'mute' %>
+              <%= link_to mute , setting_path(mute: mute)%>
+            </li>
+            <li>
               <%= link_to "Index", root_path %>
             </li>
             <li>

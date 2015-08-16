@@ -8,6 +8,10 @@ class User < ActiveRecord::Base
   after_create :create_default_conversation
 
 
+  def mute?
+    mute
+  end
+
   private
 
   # for demo purposes

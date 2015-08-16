@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root 'users#index'
+    get 'setting', to: "users#setting"
   end
 
   unauthenticated :user do
