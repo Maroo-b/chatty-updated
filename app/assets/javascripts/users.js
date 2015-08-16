@@ -63,8 +63,28 @@ var ready = function () {
         chatBox.chatWith(conversation_id);
     });
 
+    /**
+     * get user pseudo and add it to conversation
+     */
+     $(document).on('click', '#inviteBtn', function (e) {
+        e.preventDefault();
+        var user = $('#inviteUser').val();
+        var conversation_id = $('.chatboxtextarea').data('cid');
+        $.post("/conversations/"+conversation_id+"/invite", {user: user}, function(data){
+            $('#userInvit').replaceWith(
+                $('<p></p>',{
+                    text: data.msg
+                })
+                );
+            setTimeout(function() { $("#userInvit").hide(); }, 3000);
+        });
 
-}
+    });
+     
+    }
+    
+
+ 
 
 $(document).ready(ready);
 $(document).on("page:load", ready);

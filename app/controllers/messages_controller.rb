@@ -8,8 +8,14 @@ class MessagesController < ApplicationController
     @message.save!
 
     @path = conversation_path(@conversation)
-    rip = current_user == @conversation.recipient ? @conversation.sender : @conversation.recipient
-    PrivatePub.publish_to("/notifications" + rip.id.to_s, cid: @conversation.id, sid: current_user.id, rip:  rip.id)
+    rip = @conversation.users.include?(current_user) ? @conversation.sender : @conversation.users
+    if rip.is_a?(ActiveRecord::Associations::CollectionProxy)
+      rip.each do |rec|
+        PrivatePub.publish_to("/notifications" + rec.id.to_s, cid: @conversation.id, sid: current_user.id, rip:  rec.id)
+      end
+    else  
+      PrivatePub.publish_to("/notifications" + rip.id.to_s, cid: @conversation.id, sid: current_user.id, rip:  rip.id)
+    end
   end
 
   private

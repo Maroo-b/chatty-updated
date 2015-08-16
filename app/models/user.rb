@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :conversations, :foreign_key => :sender_id
-
-  after_create :create_default_conversation
+  has_and_belongs_to_many :conversations
+  #after_create :create_default_conversation
 
 
   private

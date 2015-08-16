@@ -1,5 +1,5 @@
 module UsersHelper
   def conversation_interlocutor(conversation)
-    conversation.recipient == current_user ? conversation.sender : conversation.recipient
+    conversation.users.include?(current_user) ? conversation.sender : current_user
   end
 end

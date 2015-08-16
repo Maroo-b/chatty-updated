@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   end
 
   resources :conversations do
+    member do
+      post 'invite'
+    end
     resources :messages
   end
 

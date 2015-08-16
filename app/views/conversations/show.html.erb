@@ -2,7 +2,7 @@
   <div class="chatboxtitle">
     <i class="fa fa-comments"></i>
 
-    <h1><%= @reciever.name %> </h1>
+    <h1><%= truncate(@reciever, length: 10) %> </h1>
   </div>
   <div class="chatboxoptions">
     <%= link_to "<i class='fa  fa-minus'></i> ".html_safe, "#", class: "toggleChatBox", "data-cid" => @conversation.id %>
@@ -11,6 +11,11 @@
   </div>
 </div>
 <div class="chatboxcontent">
+  <div id="userInvit">
+    <input type="text" placeholder="enter pseudo" id="inviteUser" />
+    <button id="inviteBtn">Invite</button>
+  </div>
+  
   <% if @messages.any? %>
       <%= render @messages %>
   <% end %>
